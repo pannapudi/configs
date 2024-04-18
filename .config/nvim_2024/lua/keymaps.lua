@@ -24,7 +24,12 @@ keymap("n", "<C-Right>", ":vertical resize +2<CR>", "")
 
 keymap("n", "<leader>h", "<cmd>nohlsearch<CR>", "Clear highlights")
 
-vim.keymap.set("n", "<leader>w", ':e <C-R>=expand("%:p:h") . "/" <CR>', {desc = "Open new file adjacent to current", noremap = true})
+vim.keymap.set(
+	"n",
+	"<leader>w",
+	':e <C-R>=expand("%:p:h") . "/" <CR>',
+	{ desc = "Open new file adjacent to current", noremap = true }
+)
 
 -- Remap for dealing with word wrap
 vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
@@ -58,7 +63,13 @@ keymap("n", "<C-u>", "<C-u>zz")
 keymap("n", "n", "nzzzv")
 keymap("n", "N", "Nzzzv")
 
-keymap("x", "<leader>p", "\"_dP", "Paste withoutt overwriting history")
+keymap("x", "<leader>p", '"_dP', "Paste withoutt overwriting history")
 
-vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], {noremap = true, desc = "Replace word under cursor"})
+vim.keymap.set(
+	"n",
+	"<leader>s",
+	[[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
+	{ noremap = true, desc = "Replace word under cursor" }
+)
+vim.keymap.set("v", "<leader>s", "y:%s/<C-r>0//gc<left><left><left>", { desc = "Search/replace visual" })
 keymap("n", "<leader>x", "<cmd>!chmod +x %<CR>", "Execute script in vim")

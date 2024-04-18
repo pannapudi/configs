@@ -4,9 +4,11 @@ return {
 		"nvim-lua/plenary.nvim",
 		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 		"nvim-tree/nvim-web-devicons",
+		"folke/trouble.nvim",
 	},
 	config = function()
 		local telescope = require("telescope")
+		local trouble = require("trouble.providers.telescope")
 
 		local keymap = function(mode, lhs, rhs, str)
 			local opts = { desc = str, noremap = true, silent = true }
@@ -18,7 +20,7 @@ return {
 		keymap("n", "<leader>fg", builtin.grep_string, "Grep String")
 		vim.keymap.set("n", "<leader>fs", function()
 			builtin.grep_string({ search = vim.fn.input("Grep > "), only_sort_text = true })
-		end, {desc =  "Grep Filter String", noremap = true})
+		end, { desc = "Grep Filter String", noremap = true })
 		keymap("n", "<leader>fp", ":Telescope projects<CR>", "Search Project")
 		keymap("n", "<leader>fb", builtin.buffers, "Search buffers")
 
@@ -72,7 +74,7 @@ return {
 
 						["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
 						["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
-						["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
+						["<C-q>"] = trouble.open_with_trouble,
 						["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
 						["<C-l>"] = actions.complete_tag,
 						["<C-_>"] = actions.which_key, -- keys from pressing <C-/>
@@ -86,7 +88,7 @@ return {
 
 						["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
 						["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
-						["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
+						["<C-q>"] = trouble.open_with_trouble,
 						["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
 
 						["j"] = actions.move_selection_next,
@@ -109,7 +111,7 @@ return {
 						["?"] = actions.which_key,
 					},
 				},
-			}
+			},
 		})
-	end
+	end,
 }

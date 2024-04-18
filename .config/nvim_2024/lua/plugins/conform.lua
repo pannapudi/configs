@@ -11,6 +11,7 @@ return {
 			c = { "clang-format" },
 			cpp = { "clang-format" },
 			wgsl = { "clang-format" },
+			glsl = { "clang-format" },
 		},
 	},
 }
