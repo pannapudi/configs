@@ -27,7 +27,7 @@
 [help]
 	autocorrect = 1
 [github]
-	user = disDeal
+	user = pudnax
 [diff]
 	algorithm = patience
 	compactionHeuristic = true
