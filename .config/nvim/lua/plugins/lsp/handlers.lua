@@ -11,7 +11,7 @@ for _, sign in ipairs(signs) do
 	vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
 end
 
-M.config = {
+local config = {
 	virtual_text = true, -- enable virtual text
 	signs = {
 		active = signs, -- show signs
@@ -32,18 +32,27 @@ M.config = {
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 M.capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
-local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+local format_augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 M.on_attach = function(client, bufnr)
 	if client.supports_method("textDocument/formatting") then
-		vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+		vim.api.nvim_clear_autocmds({ group = format_augroup, buffer = bufnr })
 		vim.api.nvim_create_autocmd("BufWritePre", {
-			group = augroup,
+			group = format_augroup,
 			buffer = bufnr,
 			callback = function()
 				vim.lsp.buf.format({ bufnr = bufnr })
 			end,
 		})
 	end
+
+	if client.server_capabilities.inlayHintProvider then
+		vim.lsp.inlay_hint.enable(true)
+		-- vim.defer_fn(function()
+		-- 	vim.lsp.inlay_hint.enable(true)
+		-- end, 1000)
+	end
+
+	vim.diagnostic.config(config)
 
 	local nmap = function(keys, func, desc)
 		if desc then
@@ -57,7 +66,8 @@ M.on_attach = function(client, bufnr)
 	nmap("<leader>la", vim.lsp.buf.code_action, "Code Action")
 	nmap("gd", vim.lsp.buf.definition, "Goto Definition")
 	nmap("gpd", require("goto-preview").goto_preview_definition, "Peek Definition")
-	nmap("gr", require("telescope.builtin").lsp_references, "Goto References")
+	nmap("gr", "<cmd>Trouble lsp_references<CR>", "Goto References")
+	-- nmap("gr", vim.lsp.buf.references, "Goto References")
 	nmap("gi", vim.lsp.buf.implementation, "Goto Implementation")
 	nmap("gI", vim.lsp.buf.declaration, "Goto Declaration")
 	nmap("gD", vim.lsp.buf.type_definition, "Goto Type Definition")
@@ -70,14 +80,24 @@ M.on_attach = function(client, bufnr)
 	-- nmap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
 	nmap("W", vim.diagnostic.goto_prev, "Go to previous diagnostic message")
 	nmap("E", vim.diagnostic.goto_next, "Go to next diagnostic message")
-	nmap("<leader>w", vim.diagnostic.open_float, "Open floating diagnostic message")
+	-- nmap("<leader>w", vim.diagnostic.open_float, "Open floating diagnostic message")
 	nmap("<leader>q", vim.diagnostic.setloclist, "Open diagnostics list")
+	if vim.lsp.inlay_hint then
+		vim.keymap.set("n", "<leader>lh", function()
+			vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({}), {})
+		end, { desc = "Toggle Inlay Hints" })
+	end
 
 	local status_ok, illuminate = pcall(require, "illuminate")
 	if not status_ok then
 		return
 	end
 	illuminate.on_attach(client)
+
+	vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+		border = "rounded",
+		width = 80,
+	})
 end
 
 return M

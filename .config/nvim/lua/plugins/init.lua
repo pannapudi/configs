@@ -27,9 +27,15 @@ return {
 	{ "kylechui/nvim-surround", event = "VeryLazy", opts = {} }, -- Add/change/delete surrounding brackets
 	{ "lewis6991/gitsigns.nvim", event = { "BufReadPre", "BufNewFile" }, opts = {} },
 	{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
-	{ "j-hui/fidget.nvim", opts = { notification = {
-		window = { winblend = 0 },
-	} } },
+	{ "kevinhwang91/nvim-bqf", ft = "qf", opts = {} },
+	{
+		"j-hui/fidget.nvim",
+		opts = {
+			notification = {
+				window = { winblend = 0 },
+			},
+		},
+	},
 
 	{
 		"smoka7/hop.nvim",

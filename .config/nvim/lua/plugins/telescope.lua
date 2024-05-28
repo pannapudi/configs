@@ -5,10 +5,14 @@ return {
 		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 		"nvim-tree/nvim-web-devicons",
 		"folke/trouble.nvim",
+		-- { "nvim-telescope/telescope-ui-select.nvim" },
 	},
 	config = function()
 		local telescope = require("telescope")
 		local trouble = require("trouble.providers.telescope")
+
+		pcall(require("telescope").load_extension, "fzf")
+		-- pcall(require("telescope").load_extension, "ui-select")
 
 		local keymap = function(mode, lhs, rhs, str)
 			local opts = { desc = str, noremap = true, silent = true }

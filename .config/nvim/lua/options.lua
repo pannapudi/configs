@@ -33,3 +33,4 @@ vim.opt.shortmess:append("c") -- hide all the completion messages, e.g. "-- XXX 
 vim.opt.iskeyword:append("-") -- treats words with `-` as single words
 vim.opt.diffopt:append("iwhite,indent-heuristic") -- diff settings
 vim.opt.grepprg = "rg --vimgrep --follow" -- set rg by default
+vim.opt.inccommand = "split"
