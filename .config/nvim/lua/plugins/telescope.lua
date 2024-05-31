@@ -9,7 +9,7 @@ return {
 	},
 	config = function()
 		local telescope = require("telescope")
-		local trouble = require("trouble.providers.telescope")
+		local trouble = require("trouble.sources.telescope")
 
 		pcall(require("telescope").load_extension, "fzf")
 		-- pcall(require("telescope").load_extension, "ui-select")
@@ -78,7 +78,7 @@ return {
 
 						["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
 						["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
-						["<C-q>"] = trouble.open_with_trouble,
+						["<C-q>"] = trouble.open,
 						["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
 						["<C-l>"] = actions.complete_tag,
 						["<C-_>"] = actions.which_key, -- keys from pressing <C-/>
@@ -92,7 +92,7 @@ return {
 
 						["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
 						["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
-						["<C-q>"] = trouble.open_with_trouble,
+						["<C-q>"] = trouble.open,
 						["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
 
 						["j"] = actions.move_selection_next,

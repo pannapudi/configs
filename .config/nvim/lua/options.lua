@@ -34,3 +34,4 @@ vim.opt.iskeyword:append("-") -- treats words with `-` as single words
 vim.opt.diffopt:append("iwhite,indent-heuristic") -- diff settings
 vim.opt.grepprg = "rg --vimgrep --follow" -- set rg by default
 vim.opt.inccommand = "split"
+vim.opt.spell = true -- enable spell checking

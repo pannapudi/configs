@@ -23,6 +23,14 @@ return {
 				})
 			end,
 			["rust_analyzer"] = function() end,
+			["typos_lsp"] = function()
+				local lsp_config = require("lspconfig")
+				lsp_config.typos_lsp.setup({
+					init_options = {
+						diagnosticSeverity = "Warning",
+					},
+				})
+			end,
 			-- Custom configuration for lua_ls server
 			["lua_ls"] = function()
 				local lsp_config = require("lspconfig")

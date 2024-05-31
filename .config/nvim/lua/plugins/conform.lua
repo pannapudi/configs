@@ -7,11 +7,13 @@ return {
 			lsp_fallback = true,
 		},
 		formatters_by_ft = {
+			-- typst = { "typstfmt" },
 			lua = { "stylua" },
 			c = { "clang-format" },
 			cpp = { "clang-format" },
 			wgsl = { "clang-format" },
 			glsl = { "clang-format" },
+			["*"] = { "codespell" },
 		},
 	},
 }

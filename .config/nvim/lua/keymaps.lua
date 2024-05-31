@@ -16,6 +16,8 @@ keymap("n", "<C-j>", "<C-w>j", "")
 keymap("n", "<C-k>", "<C-w>k", "")
 keymap("n", "<C-l>", "<C-w>l", "")
 
+-- keymap("n", "<leader>lt", "<cmd>AerialToggle!<CR>", "Toggle Symbol Tree")
+
 -- Resize with arrows
 keymap("n", "<C-Up>", ":resize -2<CR>", "")
 keymap("n", "<C-Down>", ":resize +2<CR>", "")
@@ -63,7 +65,7 @@ keymap("n", "<C-u>", "<C-u>zz")
 keymap("n", "n", "nzzzv")
 keymap("n", "N", "Nzzzv")
 
-keymap("x", "<leader>p", '"_dP', "Paste withoutt overwriting history")
+keymap("x", "<leader>p", '"_dP', "Paste without overwriting history")
 
 vim.keymap.set(
 	"n",

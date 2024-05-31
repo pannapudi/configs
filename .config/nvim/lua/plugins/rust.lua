@@ -46,7 +46,7 @@ return {
 						require("plugins.lsp.handlers").on_attach(client, bufnr)
 
 						require("which-key").register({
-							["a"] = { "<Cmd>RustLsp codeAction<CR>", "Code Action" },
+							["<Leader>a"] = { "<Cmd>RustLsp codeAction<CR>", "Code Action" },
 							["<Leader>l"] = {
 								c = { "<Cmd>RustLsp openCargo<CR>", "Open Cargo.toml" },
 								p = { "<Cmd>RustLsp parentModule<CR>", "Parent Module" },
@@ -55,8 +55,8 @@ return {
 								l = { "<Cmd>RustLsp renderDiagnostic<CR>", "Line Info" },
 							},
 							["J"] = { "<Cmd>RustLsp joinLines<CR>", "Join Lines" },
-							["<A-k>"] = { "<Cmd>RustLsp moveItem up<CR>", "Move item up" },
-							["<A-j>"] = { "<Cmd>RustLsp moveItem down<CR>", "Move item down" },
+							-- ["<A-k>"] = { "<Cmd>RustLsp moveItem up<CR>", "Move item up" },
+							-- ["<A-j>"] = { "<Cmd>RustLsp moveItem down<CR>", "Move item down" },
 							K = { "<Cmd>RustLsp hover actions<CR>", "Documentation" },
 						}, { buffer = bufnr })
 					end,

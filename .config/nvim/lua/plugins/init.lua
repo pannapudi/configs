@@ -19,7 +19,7 @@ return {
 	{ "stevearc/dressing.nvim", event = "VeryLazy", opts = {} }, -- Pretty UI
 	{ "tikhomirov/vim-glsl" }, -- glsl support
 	{ "nacro90/numb.nvim", opts = {} }, -- peek line jumps
-	{ "ron-rs/ron.vim" }, -- ron file suppoort
+	{ "ron-rs/ron.vim" }, -- ron file support
 	{ "rhysd/clever-f.vim" }, -- better f jumps
 	{ "rmagatti/goto-preview", opts = {} }, -- peek lsp commands in separate window
 	{ "windwp/nvim-spectre", opts = {} }, -- Search and Replace
@@ -35,6 +35,35 @@ return {
 				window = { winblend = 0 },
 			},
 		},
+	},
+
+	{
+		"chomosuke/typst-preview.nvim",
+		lazy = false, -- or ft = 'typst'
+		version = "0.3.*",
+		build = function()
+			require("typst-preview").update()
+		end,
+		config = function()
+			-- vim.api.nvim_create_autocmd(
+			-- 	{
+			-- 		"BufNewFile",
+			-- 		"BufRead",
+			-- 	},
+			-- 	{
+			-- 		pattern = "*.typ",
+			-- 		callback = function()
+			-- 			local buf = vim.api.nvim_get_current_buf()
+			-- 			vim.api.nvim_buf_set_option(buf, "filetype", "typst")
+			-- 			vim.filetype.add({
+			-- 				extension = {
+			-- 					typ = "typst"
+			-- 				}
+			-- 			})
+			-- 		end
+			-- 	}
+			-- )
+		end,
 	},
 
 	{
@@ -91,7 +120,7 @@ return {
 			"nvim-tree/nvim-web-devicons",
 		},
 		keys = { -- Example mapping to toggle outline
-			{ "<F8>", "<cmd>AerialToggle!<CR>", desc = "Toggle outline" },
+			{ "<leader>lt", "<cmd>AerialToggle!<CR>", desc = "Toggle outline" },
 		},
 		opts = {
 			layout = {
