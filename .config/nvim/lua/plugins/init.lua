@@ -15,7 +15,6 @@ return {
 	{ "max397574/better-escape.nvim", opts = { mapping = { "jk", "kj" } } },
 	{ "folke/todo-comments.nvim", opts = { signs = false } },
 	{ "kaplanz/nvim-retrail", opts = {} }, -- Trim and highlight whitespace
-	{ "andymass/vim-matchup" }, -- Better matching brackets on S-5
 	{ "stevearc/dressing.nvim", event = "VeryLazy", opts = {} }, -- Pretty UI
 	{ "tikhomirov/vim-glsl" }, -- glsl support
 	{ "nacro90/numb.nvim", opts = {} }, -- peek line jumps
