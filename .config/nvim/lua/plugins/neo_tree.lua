@@ -9,6 +9,7 @@ return {
 		},
 		config = function()
 			vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
+			vim.keymap.set("n", "<leader>e", ":Neotree toggle left<CR>", { desc = "Toggle NeoTree" })
 			require("neo-tree").setup({
 				close_if_last_window = true,
 				open_files_do_not_replace_types = { "terminal", "trouble", "qf" }, -- when opening files, do not use windows containing these filetypes or buftypes

@@ -13,12 +13,16 @@ return {
 			},
 		},
 	},
+	-- {
+	-- 	"vxpm/ferris.nvim",
+	-- 	opts = {},
+	-- },
 	{
 		"mrcjkb/rustaceanvim",
-		-- version = "^4", -- Recommended
-		ft = { "rust" },
+		version = "^6", -- Recommended
+		lazy = false, -- This plugin is already lazy
 		config = function()
-			local extension_path = vim.fn.stdpath("data") .. "/mason/packages/codelldb/extension/"
+			local extension_path = vim.fn.expand("$MASON/packages/codelldb/extension/")
 			local codelldb_path = extension_path .. "adapter/codelldb"
 			local liblldb_path = extension_path .. "lldb/lib/liblldb.so"
 
@@ -41,41 +45,25 @@ return {
 
 				-- LSP configuration
 				server = {
-					cmd = { vim.fn.stdpath("data") .. "/mason/bin/rust-analyzer" },
-					on_attach = function(client, bufnr)
-						require("plugins.lsp.handlers").on_attach(client, bufnr)
-
-						require("which-key").register({
-							["<Leader>a"] = { "<Cmd>RustLsp codeAction<CR>", "Code Action" },
-							["<Leader>l"] = {
-								c = { "<Cmd>RustLsp openCargo<CR>", "Open Cargo.toml" },
-								p = { "<Cmd>RustLsp parentModule<CR>", "Parent Module" },
-								R = { "<Cmd>RustLsp runnables<CR>", "Runnables" },
-								D = { "<Cmd>RustLsp debuggables<CR>", "Debuggables" },
-								l = { "<Cmd>RustLsp renderDiagnostic<CR>", "Line Info" },
-							},
-							["J"] = { "<Cmd>RustLsp joinLines<CR>", "Join Lines" },
-							-- ["<A-k>"] = { "<Cmd>RustLsp moveItem up<CR>", "Move item up" },
-							-- ["<A-j>"] = { "<Cmd>RustLsp moveItem down<CR>", "Move item down" },
-							K = { "<Cmd>RustLsp hover actions<CR>", "Documentation" },
-						}, { buffer = bufnr })
-					end,
-					capabilities = require("plugins.lsp.handlers").capabilities,
 					default_settings = {
 						-- rust-analyzer language server configuration
 						["rust-analyzer"] = {
 							inlayHints = {
 								closureReturnTypeHints = true,
 								lifetimeElisionHints = { enable = "skip_trivial" },
+								parameterHints = false,
 							},
 							assist = {
 								-- importMergeBehaviour = "last",
 								importPrefix = "by_self",
 								expressionFillDefault = "default",
 							},
+							check = {
+								command = "check",
+							},
 							diagnostics = {
 								-- disabled = { "unresolved-import" },
-								-- experimental = { enable = true },
+								experimental = { enable = true },
 							},
 							workspace = {
 								symbol = {
@@ -90,7 +78,6 @@ return {
 						},
 					},
 				},
-				-- DAP configuration
 				dap = {
 					adapter = cfg.get_codelldb_adapter(codelldb_path, liblldb_path),
 				},

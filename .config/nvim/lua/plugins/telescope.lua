@@ -1,5 +1,6 @@
 return {
 	"nvim-telescope/telescope.nvim",
+	event = "VimEnter",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
@@ -82,6 +83,7 @@ return {
 						["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
 						["<C-l>"] = actions.complete_tag,
 						["<C-_>"] = actions.which_key, -- keys from pressing <C-/>
+						["<esc>"] = actions.close,
 					},
 					n = {
 						["<esc>"] = actions.close,

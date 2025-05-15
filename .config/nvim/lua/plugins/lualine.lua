@@ -1,4 +1,3 @@
-
 return {
 	"nvim-lualine/lualine.nvim",
 	dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -53,5 +52,5 @@ return {
 			},
 			extensions = { "fugitive", "neo-tree", "quickfix" },
 		})
-	end
+	end,
 }

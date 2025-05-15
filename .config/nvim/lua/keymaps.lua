@@ -7,16 +7,13 @@ vim.keymap.set({ "n", "v" }, "q:", "<Nop>", { silent = true })
 vim.keymap.set({ "n", "v" }, "Q:", "<Nop>", { silent = true })
 
 keymap("n", ";", ":", "")
--- keymap("n", ":Q", ":q", "")
+keymap("n", ":Q", ":q", "")
 keymap("n", "<C-s>", "<Cmd>write<CR>", "Safe file")
 
--- Better window navigation
-keymap("n", "<C-h>", "<C-w>h", "")
-keymap("n", "<C-j>", "<C-w>j", "")
-keymap("n", "<C-k>", "<C-w>k", "")
-keymap("n", "<C-l>", "<C-w>l", "")
-
--- keymap("n", "<leader>lt", "<cmd>AerialToggle!<CR>", "Toggle Symbol Tree")
+keymap("n", "<C-h>", "<C-w><C-h>", "Move focus to the left window")
+keymap("n", "<C-l>", "<C-w><C-l>", "Move focus to the right window")
+keymap("n", "<C-j>", "<C-w><C-j>", "Move focus to the lower window")
+keymap("n", "<C-k>", "<C-w><C-k>", "Move focus to the upper window")
 
 -- Resize with arrows
 keymap("n", "<C-Up>", ":resize -2<CR>", "")
@@ -24,8 +21,10 @@ keymap("n", "<C-Down>", ":resize +2<CR>", "")
 keymap("n", "<C-Left>", ":vertical resize -2<CR>", "")
 keymap("n", "<C-Right>", ":vertical resize +2<CR>", "")
 
-keymap("n", "<leader>h", "<cmd>nohlsearch<CR>", "Clear highlights")
+-- Clear highlights on search when pressing <Esc> in normal mode
+vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
+-- Edit file relative to the current buffer
 vim.keymap.set(
 	"n",
 	"<leader>w",
@@ -52,9 +51,6 @@ keymap("n", "]q", ":cnext<CR>", "")
 keymap("n", "[q", ":cprev<CR>", "")
 -- keymap("n", "<C-q>", ":call QuickFixToggle()<CR>", "")
 
--- keymaps
-keymap("n", "<leader>e", ":Neotree toggle left<CR>")
-
 -- Fugitive
 keymap("n", "<leader>gh", "<cmd>diffget //3<CR>", "Fugitive: Put Right")
 keymap("n", "<leader>gf", "<cmd>diffget //2<CR>", "Fugitive: Put Left")
@@ -66,12 +62,3 @@ keymap("n", "n", "nzzzv")
 keymap("n", "N", "Nzzzv")
 
 keymap("x", "<leader>p", '"_dP', "Paste without overwriting history")
-
-vim.keymap.set(
-	"n",
-	"<leader>s",
-	[[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
-	{ noremap = true, desc = "Replace word under cursor" }
-)
-vim.keymap.set("v", "<leader>s", "y:%s/<C-r>0//gc<left><left><left>", { desc = "Search/replace visual" })
-keymap("n", "<leader>x", "<cmd>!chmod +x %<CR>", "Execute script in vim")

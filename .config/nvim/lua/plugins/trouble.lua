@@ -2,6 +2,7 @@ return {
 	"folke/trouble.nvim",
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	cmd = "Trouble",
+	lazy = false,
 	config = function()
 		vim.keymap.set("n", "<C-q>", function()
 			require("trouble").toggle()
@@ -15,9 +16,6 @@ return {
 		vim.keymap.set("n", "<leader>xw", function()
 			require("trouble").toggle("document_diagnostics")
 		end, { desc = "Trouble: Document Diagnostics" })
-		vim.keymap.set("n", "gR", function()
-			require("trouble").toggle("lsp_references")
-		end, { desc = "Trouble: References" })
 		vim.keymap.set("n", "<A-j>", function()
 			require("trouble").next({ skip_groups = true, jump = true })
 		end, { desc = "Trouble: Next" })

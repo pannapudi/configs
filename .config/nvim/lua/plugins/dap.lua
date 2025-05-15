@@ -2,7 +2,14 @@ return {
 	"mfussenegger/nvim-dap",
 	dependencies = {
 		"rcarriga/nvim-dap-ui",
-		"theHamsta/nvim-dap-virtual-text",
+		{
+			"theHamsta/nvim-dap-virtual-text",
+			opts = {
+				highlight_changed_variables = true, -- highlight changed values with NvimDapVirtualTextChanged, else always NvimDapVirtualText
+				highlight_new_as_changed = false, -- highlight new variables in the same way as changed variables (if highlight_changed_variables)
+				clear_on_continue = true, -- clear virtual text on "continue" (might cause flickering when stepping)
+			},
+		},
 		"nvim-neotest/nvim-nio",
 		"jonboh/nvim-dap-rr",
 		"williamboman/mason.nvim",
@@ -14,30 +21,17 @@ return {
 		ui.setup()
 		require("nvim-dap-virtual-text").setup()
 
-		local cpptools_path = vim.fn.stdpath("data")
-			.. "/mason/packages/cpptools/extension/debugAdapters/bin/OpenDebugAD7"
+		local cpptools_path = vim.fn.expand("$MASON/packages/cpptools/extension/debugAdapters/bin/OpenDebugAD7")
 		dap.adapters.cppdbg = {
 			id = "cppdbg",
 			type = "executable",
 			command = cpptools_path,
 		}
-		-- local codelldb_extension_path = vim.fn.stdpath("data") .. "/mason/packages/codelldb/extension/"
-		-- local codelldb_path = codelldb_extension_path .. "adapter/codelldb"
-		-- dap.adapters.codelldb = {
-		-- 	type = "server",
-		-- 	host = "127.0.0.1",
-		-- 	port = "${port}",
-		--
-		-- 	executable = {
-		-- 		command = codelldb_path,
-		-- 		args = { "--port", "${port}" },
-		-- 	},
-		-- }
 
 		vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DiagnosticSignError", linehl = "", numhl = "" })
 
 		vim.keymap.set("n", "<space>b", dap.toggle_breakpoint)
-		vim.keymap.set("n", "<space>gb", dap.run_to_cursor)
+		-- vim.keymap.set("n", "<space>gb", dap.run_to_cursor)
 
 		vim.keymap.set("n", "<F1>", dap.terminate)
 		vim.keymap.set("n", "<F2>", dap.restart)
