@@ -1,9 +1,0 @@
-    incsearch = true,
-    gdefault = true,
-    shiftwidth = 4, -- the number of spaces inserted for each indentation
-    tabstop = 4, -- insert 2 spaces for a tab
-    softtabstop = 4, -- insert 2 spaces for a tab
-    relativenumber = true, -- set relative numbered lines
-    wrap = true, -- display lines as one long line
-    colorcolumn = "100",
-    magic = true,
